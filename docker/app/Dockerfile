@@ -5,4 +5,7 @@ RUN pip install -r requirements.txt
 
 WORKDIR /app
 EXPOSE 8080
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+
+# install and compile stock fish
+RUN git clone https://github.com/official-stockfish/Stockfish.git
+RUN cd Stockfish/src/ && make -j build
