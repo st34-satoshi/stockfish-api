@@ -37,7 +37,7 @@ class ChessEngine:
         if lose, mate is minus
         """
         self.p.stdin.write(f"position startpos moves {moves}\n".encode())
-        self.p.stdin.write("go depth 25 \n".encode())
+        self.p.stdin.write("go depth 20 \n".encode())
         self.p.stdin.flush()
         output = ""
         res = {"mate": None, "score": None, "best_move": None}
