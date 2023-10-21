@@ -7,7 +7,7 @@ class ChessEngine:
 
     def __init__(self) -> None:
         self.p = subprocess.Popen(
-            ("Stockfish/src/stockfish"),
+            ("/lib/stockfish"),
             stdout=subprocess.PIPE,
             stdin=subprocess.PIPE,
         )
