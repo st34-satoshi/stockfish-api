@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  web:
+    container_name: stockfish_api_web
+    build: docker/app/
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8080"
+    ports:
+      - '3000:8080'
+    volumes:
+      - ./app:/app
+    environment:
+      RAILS_ENV: production
+    healthcheck:
+      test: "curl http://localhost:3000 || exit 1"
+      interval: 3s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+  nginx:
+    container_name: stockfish_api_nginx
+    build: docker/nginx/
+    volumes:
+      - ./run/:/var/run/
+    depends_on:
+      web:
+        condition: service_healthy

@@ -3,3 +3,4 @@ app/models/__pycache__/
 app/log/logger.log
 app/Stockfish/
 venv-stockfish/
+.DS_Store
