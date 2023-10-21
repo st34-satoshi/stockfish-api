@@ -1,10 +1,26 @@
 from fastapi import FastAPI, Request
 from models.engine import ChessEngine
+from fastapi.middleware.cors import CORSMiddleware
 import logging
 
 logging.basicConfig(filename='log/logger.log', encoding='utf-8', level=logging.INFO)
 
 app = FastAPI()
+
+origins = [
+    "http://chess-database.stu345.com",
+    "https://chess-database.stu345.com",
+    "http://localhost:8080",
+    "http://localhost:3001",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 CHESS_ENGINE = ChessEngine()
 
