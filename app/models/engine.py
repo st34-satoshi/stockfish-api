@@ -11,6 +11,7 @@ class ChessEngine:
             stdout=subprocess.PIPE,
             stdin=subprocess.PIPE,
         )
+        self.start_engin()
 
     def kill(self) -> None:
         self.p.kill()
@@ -30,12 +31,12 @@ class ChessEngine:
             # output = self.p.stdout.readline
             output = self.p.stdout.readline().decode().strip()
 
-    def best_move(self, fen_position):
+    def best_move(self, moves):
         """
         return {mate: 2, score: 100, best_move: e2e4}
         if lose, mate is minus
         """
-        self.p.stdin.write(f"position fen {fen_position}\n".encode())
+        self.p.stdin.write(f"position startpos moves {moves}\n".encode())
         self.p.stdin.write("go depth 25 \n".encode())
         self.p.stdin.flush()
         output = ""

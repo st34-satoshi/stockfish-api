@@ -12,16 +12,10 @@ CHESS_ENGINE = ChessEngine()
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
 @app.post("/analysis")
-async def callback(request: Request, position: str):
-    logging.info(f'position = {position}')
+async def analysis(request: Request, moves: str = "e2e4 e7e5"):
+    logging.info(f'position = {moves}')
     logging.info(f'request = {request}')
-    CHESS_ENGINE.start_engin()
     # TODO: position is correct?
-    res = CHESS_ENGINE.best_move(position)
-    # res = CHESS_ENGINE.best_move('rnbqkbnr/pppppppp/8/8/6P1/8/PPPPPP1P/RNBQKBNR b KQkq - 0 1')
-    return {"message": "ok", "position": position, "score": res["score"], "mate": res["mate"], "best_move": res["best_move"]}
+    res = CHESS_ENGINE.best_move(moves)
+    return {"message": "ok", "moves": moves, "score": res["score"], "mate": res["mate"], "best_move": res["best_move"]}
