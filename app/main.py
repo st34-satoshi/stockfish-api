@@ -30,7 +30,7 @@ def read_root():
 
 @app.post("/analysis")
 async def analysis(request: Request, moves: str = "e2e4 e7e5"):
-    logging.info(f'position = {moves}')
+    logging.info(f'moves = {moves}')
     logging.info(f'request = {request}')
     # TODO: position is correct?
     res = CHESS_ENGINE.best_move(moves)
